@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer")
+var  cTable = require('console.table');
 
 // var prompt = inquirer.createPromptModule();
  
@@ -26,41 +27,52 @@ database: "baMazon"
 connection.connect(function (err) {
     if (err) throw err;
     console.log("connected");
-    // Question();
+
+connection.query('SELECT * from Product', function (error, results, fields) {
+  if (error) throw error;
+  console.table(results);
+
+  Question()
 });
+ 
+// connection.end();
 
-// function Question() {
+})
 
-// inquirer
-//   .prompt({
+
+
+
+
+    
+
+function Question() {
+
+inquirer
+  .prompt([{
       
-//     question:"What item_id would you like?",
-//     choices:[100,200,300,400,500,600,700,800,900,1000, "exit"]
+    type: "input",
+    name: "name",
+    message:"What item_id would you like?"
+  },
+    {
+      type: "input",
+      name: "user",
+      message:"How many would you like?",
+
+    }
+
+  ])
+  console.log(message)
     
+  .then( function (answer) {
+    // Use user feedback for... whatever!!
+    console.log(answer.user)
     
-   
-    
-//   })
-//   console.log(question)
-    
-//   .then( function (answer) {
-//     // Use user feedback for... whatever!!
-//   });
-//   console.log(Question)
-
-
-
-
-
-
+  });
+  
+  };
+  
  
-// connection.query('SELECT * from Product', function (error, results, fields) {
-//   if (error) throw error;
-//   console.log(results);
-// });
- 
-connection.end();
-
 
 
 
